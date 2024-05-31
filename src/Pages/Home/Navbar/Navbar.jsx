@@ -1,15 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
+import useAuth from "../../../hooks/useAuth";
 const Navbar = () => {
-
+    const { user, logOut } = useAuth()
     const link = <>
         <div className="flex  flex-col text-[15px] lg:flex-row" id="sidebar">
             <li><NavLink to={'/'}>Home</NavLink></li>
             <li><NavLink to={'/products'}>Products</NavLink></li>
         </div>
     </>
+
+
+
+    const handleLogout = () => {
+        logOut()
+            .then()
+            .catch()
+    }
+
+
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar backdrop-blur-lg bg-white bg-opacity-30 md:px-10 h-20">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -20,7 +31,7 @@ const Navbar = () => {
                         {link}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">ProdPeek</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -31,16 +42,27 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <img alt="Tailwind CSS Navbar component" src=
+                            {user?.photoURL || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg' } />
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-[#4f80d4] rounded-lg w-52">
                         <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
-                            <a href="#" className="block">Dashboard</a>
+                            <a href="#" className="flex justify-start">Dashboard</a>
                         </li>
-                        <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
-                            <a href="#" className="block">Login</a>
-                        </li>
+
+
+
+                        {
+                            user ? <li>
+                                <button className="flex justify-start"
+                            onClick={handleLogout}>Logout</button>
+                            </li>:
+                           
+                                <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
+                                    <Link to={'/login'} className="flex justify-start">Login</Link>
+                                </li>
+                        }
                     </ul>
                 </div>
             </div>
