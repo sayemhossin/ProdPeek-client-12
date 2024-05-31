@@ -31,7 +31,7 @@ const Navbar = () => {
                         {link}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">ProdPeek</a>
+                <Link to={'/'} className="md:text-5xl cursor-pointer hover:bg-white font-bold btn-ghost text-xl">ProdPeek</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -41,7 +41,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
+                        <div className="w-10 md:w-20 rounded-full border-4 border-blue-500">
                             <img alt="Tailwind CSS Navbar component" src=
                             {user?.photoURL || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg' } />
                         </div>
@@ -54,7 +54,7 @@ const Navbar = () => {
 
 
                         {
-                            user ? <li>
+                            user ? <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
                                 <button className="flex justify-start"
                             onClick={handleLogout}>Logout</button>
                             </li>:

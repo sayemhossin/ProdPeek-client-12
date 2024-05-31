@@ -57,13 +57,16 @@ const Login = () => {
   
 
     return (
-        <div className='flex justify-center items-center min-h-screen'>
-        <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
+        <div style={{
+            backgroundImage: 'url(https://i.ibb.co/JmTqt5D/pngtree-blue-water-wave-ocean-background-hd-image-770489.jpg)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize:'cover',
+            backgroundPosition: 'center'
+        }} className='flex  justify-center items-center min-h-screen'>
+        <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-blue-100 text-gray-900'>
           <div className='mb-8 text-center'>
             <h1 className='my-3 text-4xl font-bold'>Log In</h1>
-            <p className='text-sm text-gray-400'>
-              Sign in to access your account
-            </p>
+            
           </div>
           <form
             onSubmit={handleSubmit}
@@ -80,7 +83,7 @@ const Login = () => {
                   id='email'
                   required
                   placeholder='Enter Your Email Here'
-                  className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                  className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-100 text-gray-900'
                   data-temp-mail-org='0'
                 />
               </div>
@@ -97,7 +100,7 @@ const Login = () => {
                   id='password'
                   required
                   placeholder='*******'
-                  className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                  className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-100 text-gray-900'
                 />
               </div>
             </div>
@@ -106,7 +109,7 @@ const Login = () => {
               <button
                 disabled={loading}
                 type='submit'
-                className='bg-rose-500 w-full rounded-md py-3 text-white'
+                className='bg-[#40679E]  w-full rounded-md py-3 text-white'
               >
                 {loading ? <TbFidgetSpinner className='animate-spin m-auto' /> : 'continue'}
               </button>
@@ -121,13 +124,13 @@ const Login = () => {
           </div>
           <button
             disabled={loading}
-            onClick={handleGoogleSignIn} className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+            onClick={handleGoogleSignIn} className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border rounded-full hover:bg-[#c1d1e9] m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
             <FcGoogle size={32} />
   
             <p>Continue with Google</p>
           </button>
           <p className='px-6 text-sm text-center text-gray-400'>
-            Dont have an account yet?{' '}
+            Don not have an account yet?{' '}
             <Link
               to='/register'
               className='hover:underline hover:text-rose-500 text-gray-600'
