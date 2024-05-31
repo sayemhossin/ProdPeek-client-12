@@ -1,0 +1,7 @@
+#sidebar a.active {
+ 
+    background-color: unset;
+    color: #1B3C73;
+    font-weight: 800;
+   border: 2px solid #40679E;
+}
