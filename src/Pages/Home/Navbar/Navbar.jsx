@@ -46,20 +46,25 @@ const Navbar = () => {
                             {user?.photoURL || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg' } />
                         </div>
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-[#4f80d4] rounded-lg w-52">
-                        <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
+                    <ul tabIndex={0} className="menu menu-sm font-semibold dropdown-content mt-3 z-[1] p-2 shadow-lg border-4 border-dashed border-blue-900 bg-[#acc7f5] rounded-lg w-52">
+                        <li className="p-2 rounded-md ">
+                            <p className="flex font-bold text-[16px] justify-center">{user?.displayName || 'No Name'}</p>
+                        </li>
+                        <div className="divider border-dashed border-gray-500 "></div>
+
+                        <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
                             <a href="#" className="flex justify-start">Dashboard</a>
                         </li>
 
 
 
                         {
-                            user ? <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
+                            user ? <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
                                 <button className="flex justify-start"
                             onClick={handleLogout}>Logout</button>
                             </li>:
                            
-                                <li className="p-2 hover:bg-[#3a66b3] rounded-md text-white">
+                                <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
                                     <Link to={'/login'} className="flex justify-start">Login</Link>
                                 </li>
                         }

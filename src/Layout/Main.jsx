@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../Pages/Home/Navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const Main = () => {
     const location = useLocation()
@@ -14,6 +15,7 @@ const Main = () => {
             <div className={!noHeaderFooter && 'pt-20'}>
             <Outlet></Outlet>
             </div>
+            <Toaster />
         </div>
     );
 };
