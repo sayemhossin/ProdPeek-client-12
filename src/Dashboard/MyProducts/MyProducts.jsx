@@ -1,25 +1,55 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { FaTrash } from "react-icons/fa";
 
 const MyProducts = () => {
 
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
 
-    const { data: items, isLoading } = useQuery({
-        queryKey: ['my-product',user?.email],
+    const { data: items, isLoading, refetch } = useQuery({
+        queryKey: ['my-product', user?.email],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/my-product/${user?.email}`)
+            const { data } = await axiosSecure.get(`/my-product/${user?.email}`)
             return data
         }
     })
 
-console.log(items)
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/product/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your product has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
+            }
+        });
+
+    }
+
+
     if (isLoading) return <LoadingSpinner />
-
-
     return (
         <div className="overflow-x-auto">
             <table className="table">
@@ -37,16 +67,17 @@ console.log(items)
                 <tbody>
 
                     {
-                        items.map(item=><tr key={item._id} className="hover">
-                        <th>2</th>
-                        <td>{item.productName}</td>
-                        <td>{item.upVote}</td>
-                        <td>{item.status}</td>
-                        <td>{item.status}</td>
-                        <td>{item.status}</td>
-                    </tr>)
+                        items.map(item => <tr key={item._id} className="hover">
+                            <th>2</th>
+                            <td>{item.productName}</td>
+                            <td>{item.upVote}</td>
+                            <td>{item.status}</td>
+                            <td>{item.status}</td>
+                            <td>                                    <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><FaTrash className="text-red-600" /> </button>
+                            </td>
+                        </tr>)
                     }
-                    
+
 
                 </tbody>
             </table>
