@@ -53,7 +53,7 @@ const Navbar = () => {
                         <div className="divider border-dashed border-gray-500 "></div>
 
                         <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
-                            <a href="#" className="flex justify-start">Dashboard</a>
+                            <Link to={'/dashboard'} className="flex justify-start">Dashboard</Link>
                         </li>
 
 
