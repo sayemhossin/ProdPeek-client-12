@@ -3,7 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MyProducts = () => {
 
@@ -56,7 +57,7 @@ const MyProducts = () => {
                 {/* head */}
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>#</th>
                         <th>Product Name</th>
                         <th>Number of votes</th>
                         <th>Status</th>
@@ -67,13 +68,15 @@ const MyProducts = () => {
                 <tbody>
 
                     {
-                        items.map(item => <tr key={item._id} className="hover">
-                            <th>2</th>
+                        items.map((item, idx) => <tr key={item._id} className="hover">
+                            <th>{idx + 1}</th>
                             <td>{item.productName}</td>
                             <td>{item.upVote}</td>
                             <td>{item.status}</td>
-                            <td>{item.status}</td>
-                            <td>                                    <button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><FaTrash className="text-red-600" /> </button>
+                            <td><Link className="btn btn-ghost btn-lg" to={`/dashboard/updateProduct/${item._id}`}>
+                                    <FaEdit className=" text-2xl" />
+                                </Link></td>
+                            <td><button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><FaTrash /> </button>
                             </td>
                         </tr>)
                     }

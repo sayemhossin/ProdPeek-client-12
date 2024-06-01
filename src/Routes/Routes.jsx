@@ -55,8 +55,9 @@ import UpdateProduct from "../Dashboard/UpdateProduct/UpdateProduct";
           element:<MyProducts></MyProducts>
         },
         {
-          path:'updateProduct',
-          element:<UpdateProduct></UpdateProduct>
+          path: 'updateProduct/:id',
+          element: <UpdateProduct />,
+          loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
         },
       ]
     }
