@@ -106,7 +106,7 @@ const axiosPublic = useAxiosPublic()
                             <label className="label">
                                 <span className="label-text">Product Image</span>
                             </label>
-                            <input type="file" name="productImage" className="file-input file-input-bordered file-input-primary w-full max-w-sm" required />
+                            <input type="file" name="productImage" className="file-input file-input-bordered w-full max-w-xs" required />
                         </div>
                         <div >
                             <label className="label">

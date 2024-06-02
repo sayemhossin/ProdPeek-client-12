@@ -1,7 +1,7 @@
 import {
-    createBrowserRouter,
-    
-  } from "react-router-dom";
+  createBrowserRouter,
+
+} from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Products from "../Pages/Products/Products";
@@ -14,51 +14,53 @@ import MyProducts from "../Dashboard/MyProducts/MyProducts";
 import PrivateRoute from "./PrivateRoute";
 import UpdateProduct from "../Dashboard/UpdateProduct/UpdateProduct";
 
- export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      children:[
-        {
-            path:'/',
-            element: <Home></Home>
-        },
-        {
-            path:'/products',
-            element: <Products></Products>
-        },
-        {
-            path:'/login',
-            element: <Login></Login>
-        },
-        {
-            path:'/register',
-            element: <Register></Register>
-        },
-      ]
-    },
-    {
-      path:'/dashboard',
-      element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-      children:[
-        // user dashboard
-        {
-          index:true,
-          element:<MyProfile></MyProfile>
-        },
-        {
-          path:'addProduct',
-          element:<AddProduct></AddProduct>
-        },
-        {
-          path:'myProduct',
-          element:<MyProducts></MyProducts>
-        },
-        {
-          path: 'updateProduct/:id',
-          element: <UpdateProduct />,
-          loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
-        },
-      ]
-    }
-  ]);
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/products',
+        element: <Products></Products>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/register',
+        element: <Register></Register>
+      },
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    children: [
+      // user dashboard
+      {
+        index: true,
+        element: <MyProfile></MyProfile>
+      },
+      {
+        path: 'addProduct',
+        element: <AddProduct></AddProduct>
+      },
+      {
+        path: 'myProduct',
+        element: <MyProducts></MyProducts>
+      },
+      {
+        path: 'updateProduct/:id',
+        element: <UpdateProduct />,
+        loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+      },
+      // 
+
+    ]
+  }
+]);

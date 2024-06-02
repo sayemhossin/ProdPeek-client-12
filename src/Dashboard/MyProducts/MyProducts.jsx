@@ -78,6 +78,7 @@ const MyProducts = () => {
                                 </Link></td>
                             <td><button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><FaTrash /> </button>
                             </td>
+                            
                         </tr>)
                     }
 
