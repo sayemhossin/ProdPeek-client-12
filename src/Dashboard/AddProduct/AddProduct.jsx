@@ -82,7 +82,7 @@ const axiosPublic = useAxiosPublic()
             <form onSubmit={handleSubmit} className="bg-blue-50 lg:m-16 p-5 lg:p-10 space-y-5">
                 <div className="text-center text-3xl font-bold">Add New Product</div>
                 <div className="flex gap-3 pb-10">
-                    <img src={user.photoURL} alt="" />
+                    <img width={100} src={user.photoURL} alt="" />
                     <div>
                         <h2>{user?.displayName}</h2>
                         <h2>{user?.email}</h2>
