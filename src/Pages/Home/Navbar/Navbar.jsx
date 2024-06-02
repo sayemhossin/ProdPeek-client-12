@@ -1,8 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
 import useAuth from "../../../hooks/useAuth";
+import useRole from "../../../hooks/useRole";
 const Navbar = () => {
     const { user, logOut } = useAuth()
+    const [role] = useRole()
     const link = <>
         <div className="flex  flex-col text-[15px] lg:flex-row" id="sidebar">
             <li><NavLink to={'/'}>Home</NavLink></li>
@@ -52,9 +54,22 @@ const Navbar = () => {
                         </li>
                         <div className="divider border-dashed border-gray-500 "></div>
 
-                        <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
-                            <Link to={'/dashboard'} className="flex justify-start">Dashboard</Link>
+                        {
+                            role === 'user' && <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
+                            <Link to={'/dashboard/profile'} className="flex justify-start">Dashboard</Link>
                         </li>
+                        }
+                        {
+                            role === 'moderator' && <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
+                            <Link to={'/dashboard/productReview'} className="flex justify-start">Dashboard</Link>
+                        </li>
+                        }
+                        {
+                            role === 'admin' && <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
+                            <Link to={'/dashboard/statistics'} className="flex justify-start">Dashboard</Link>
+                        </li>
+                        }
+                        
 
 
 
