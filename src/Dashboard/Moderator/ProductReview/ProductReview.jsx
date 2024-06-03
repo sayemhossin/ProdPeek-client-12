@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
+import toast from "react-hot-toast";
 
 const ProductReview = () => {
     const axiosSecure = useAxiosSecure()
@@ -12,6 +13,7 @@ const ProductReview = () => {
             return data
         }
     })
+    
     const handleReject = async(id) =>{
         await axiosSecure.patch(`/reject-product/${id}`)
         refetch()
@@ -19,6 +21,10 @@ const ProductReview = () => {
     const handleAccept = async(id) =>{
         await axiosSecure.patch(`/accept-product/${id}`)
         refetch()
+    }
+    const handleFeatured = async(id) =>{
+        await axiosSecure.patch(`/featured-product/${id}`)
+        toast.success('added successfully')
     }
 
     if(isLoading) return <LoadingSpinner/>
@@ -48,7 +54,7 @@ const ProductReview = () => {
                             <td>{item.productName}</td>
                             <td>{item.status}</td>
                             <td>Details</td>
-                            <td><button className="btn">Featured</button></td>
+                            <td><button disabled={item.status === 'reject'} onClick={()=> handleFeatured(item._id)} className="btn">Featured</button></td>
                             <td><button disabled={item.status === 'accept'} onClick={()=> handleAccept(item._id)} className="btn">accept</button></td>
 
                             <td><button disabled={item.status === 'reject'} onClick={()=> handleReject(item._id)} className="btn">reject</button></td>

@@ -17,7 +17,7 @@ const axiosPublic = useAxiosPublic()
             return data
         },
         onSuccess: () => {
-            toast.success('data saved successfully')
+            toast.success('data saved successfully Wait for admin approval')
             navigate('/dashboard/myProduct')
         }
     })

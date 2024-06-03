@@ -18,6 +18,7 @@ import ReportedContents from "../Dashboard/Moderator/ReportedContents/ReportedCo
 import Statistics from "../Dashboard/Admin/Statistics/Statistics";
 import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageCoupons from "../Dashboard/Admin/ManageCoupons/ManageCoupons";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
         path: '/register',
         element: <Register></Register>
       },
+      {
+        path: 'product-details/:id',
+        element: <PrivateRoute> <ProductDetails></ProductDetails></PrivateRoute>,
+        loader: ({ params }) => fetch(`http://localhost:5000/featured/${params.id}`)
+      },
     ]
   },
   {
@@ -48,7 +54,7 @@ export const router = createBrowserRouter([
     children: [
       // user routes
       {
-        path:'profile',
+        path: 'profile',
         element: <MyProfile></MyProfile>
       },
       {
@@ -64,27 +70,32 @@ export const router = createBrowserRouter([
         element: <UpdateProduct />,
         loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
       },
+
+
+
       // moderator route
       {
-        path:'productReview',
-        element:<ProductReview></ProductReview>
+        path: 'productReview',
+        element: <ProductReview></ProductReview>
       },
       {
-        path:'reportedContents',
-        element:<ReportedContents></ReportedContents>
+        path: 'reportedContents',
+        element: <ReportedContents></ReportedContents>
       },
+
+
       // admin route
       {
-        path:'statistics',
-        element:<Statistics></Statistics>
+        path: 'statistics',
+        element: <Statistics></Statistics>
       },
       {
-        path:'manageUsers',
-        element:<ManageUsers></ManageUsers>
+        path: 'manageUsers',
+        element: <ManageUsers></ManageUsers>
       },
       {
-        path:'manageCoupons',
-        element:<ManageCoupons></ManageCoupons>
+        path: 'manageCoupons',
+        element: <ManageCoupons></ManageCoupons>
       }
     ]
   }

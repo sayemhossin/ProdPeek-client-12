@@ -45,40 +45,42 @@ const Navbar = () => {
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 md:w-20 rounded-full border-4 border-blue-500">
                             <img alt="Tailwind CSS Navbar component" src=
-                            {user?.photoURL || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg' } />
+                                {user?.photoURL || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg'} />
                         </div>
                     </div>
                     <ul tabIndex={0} className="menu menu-sm font-semibold dropdown-content mt-3 z-[1] p-2 shadow-lg border-4 border-dashed border-blue-900 bg-[#acc7f5] rounded-lg w-52">
-                        <p className="p-2 rounded-md ">
+
+                        <li className="p-2 hover:bg-[#acc7f5] rounded-md ">
                             <p className="flex font-bold text-[16px] justify-center">{user?.displayName || 'No Name'}</p>
-                        </p>
+                        </li>
+
                         <div className="divider border-dashed border-gray-500 "></div>
 
                         {
                             role === 'user' && <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
-                            <Link to={'/dashboard/profile'} className="flex justify-start">Dashboard</Link>
-                        </li>
+                                <Link to={'/dashboard/profile'} className="flex justify-start">Dashboard</Link>
+                            </li>
                         }
                         {
                             role === 'moderator' && <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
-                            <Link to={'/dashboard/productReview'} className="flex justify-start">Dashboard</Link>
-                        </li>
+                                <Link to={'/dashboard/productReview'} className="flex justify-start">Dashboard</Link>
+                            </li>
                         }
                         {
                             role === 'admin' && <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
-                            <Link to={'/dashboard/statistics'} className="flex justify-start">Dashboard</Link>
-                        </li>
+                                <Link to={'/dashboard/statistics'} className="flex justify-start">Dashboard</Link>
+                            </li>
                         }
-                        
+
 
 
 
                         {
                             user ? <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
                                 <button className="flex justify-start"
-                            onClick={handleLogout}>Logout</button>
-                            </li>:
-                           
+                                    onClick={handleLogout}>Logout</button>
+                            </li> :
+
                                 <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
                                     <Link to={'/login'} className="flex justify-start">Login</Link>
                                 </li>
