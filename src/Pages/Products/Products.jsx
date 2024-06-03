@@ -17,7 +17,7 @@ const Products = () => {
     const [search, setSearch] = useState('');
 
     const { data: items, isLoading } = useQuery({
-        queryKey: ['featured'],
+        queryKey: ['featured',search],
         queryFn: async () => {
             const { data } = await axiosPublic.get(`/featured?search=${search}`);
             return data;
@@ -60,21 +60,23 @@ const Products = () => {
     if (isLoading) return <LoadingSpinner />;
     return (
         <div>
-            <form onSubmit={handleSearch}>
+           <div className="text-center">
+           <form onSubmit={handleSearch}>
                 <div>
                     <input
-                        className="input  rounded-r-none input-primary input-bordered border-blue-600  max-w-xs"
+                        className="input  rounded-r-none input-primary input-bordered border-blue-600  w-1/2"
                         type='text'
                         name='search'
                         onChange={e => setSearchText(e.target.value)}
                         value={searchText}
-                        placeholder='Search By Product Name'
+                        placeholder='Search By Tag Name'
                     />
                     <button className='px-1 h-[50px] rounded-l-none md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none'>
                         Search
                     </button>
                 </div>
             </form>
+           </div>
             <div className="grid grid-cols-1 md:grid-cols-2 md:mx-14 lg:grid-cols-4 lg:mx-32 gap-5">
                 {items.map(item => (
                     <div key={item._id} className="card bg-base-100 shadow-xl">
