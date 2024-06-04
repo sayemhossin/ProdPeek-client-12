@@ -1,16 +1,28 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BiUpvote } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import ReviewForm from "../../Components/ReviewForm/ReviewForm";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Review from "../../Components/Review/Review";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
     const item = useLoaderData()
     const { user } = useAuth()
     const queryClient = useQueryClient();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure()
 
+
+    const { data: reviews = [], refetch } = useQuery({
+        queryKey: ['review', item._id],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/reviews/${item._id}`);
+            return data;
+        }
+    });
 
 
     const mutation = useMutation({
@@ -26,7 +38,17 @@ const ProductDetails = () => {
         mutation.mutate(id);
     };
 
-
+    const handleReport = async () => {
+        const allInfo = {
+            Product_id: item?._id,
+            Product_name: item?.productName,
+        }
+        try {
+            await axiosSecure.post('/report', allInfo)
+         } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
 
 
@@ -59,11 +81,11 @@ const ProductDetails = () => {
                                 <div className="flex items-center bg-gray-200 ml-2 rounded-r-full px-5  py-2">
                                     <p className="">{item.upVote}</p>
                                 </div>
-                                <button className="btn  mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" >Report</button>
+                                <button onClick={handleReport} className="btn  mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" >Report</button>
                             </div>
                             {/* review form */}
                             <div>
-                                <ReviewForm item={item}></ReviewForm>
+                                <ReviewForm refetch={refetch} item={item}></ReviewForm>
                             </div>
                         </div>
 
@@ -84,9 +106,25 @@ const ProductDetails = () => {
                 </div>
             </div>
 
-            {/* Review section  */}
-            <div>
-
+            {/* All  Review For specific products  */}
+            <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
+                <h2 className="font-manrope font-bold text-4xl text-black text-center mb-11">People Love Us</h2>
+                <div className="grid grid-cols-12 py-6 border-y border-gray-200 mb-11">
+                    <div className="col-span-12 lg:col-span-10 ">
+                        <h5 className="font-manrope font-semibold text-2xl leading-9 text-black text-center">Reviews
+                            <span className="lg:hidden font-manrope font-semibold text-2xl leading-9 text-black text-center"> &
+                                Rating</span>
+                        </h5>
+                    </div>
+                    <div className="col-span-12 lg:col-span-2 max-lg:hidden">
+                        <h5 className="font-manrope font-semibold text-2xl leading-9 text-black text-center">Rating</h5>
+                    </div>
+                </div>
+                <div className="space-y-16 mx-9 lg:mx-0 md:mx-9">
+                    {
+                        reviews.map(review => <Review key={review._id} review={review}></Review>)
+                    }
+                </div>
             </div>
         </div>
     );

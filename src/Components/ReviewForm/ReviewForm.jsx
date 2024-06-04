@@ -1,14 +1,23 @@
 import { useState } from 'react'; // Import useState hook
 
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
 
-const ReviewForm = ({ item }) => {
+const ReviewForm = ({ item, refetch }) => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
 
     // State to hold the value of the select box
     const [rating, setRating] = useState('');
+    let ms = Date.now()
+    const currentDate = new Date(ms);
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
 
@@ -16,9 +25,19 @@ const ReviewForm = ({ item }) => {
         const reviewer_image = user?.photoURL;
         const product_id = item._id;
         const description = form.description.value;
+        const rating_value = parseInt(rating);
+       const  date = ` ${day}/${month}/${year}`
 
-        // Use the rating state value
-        console.log(reviewer_image, reviewer_name, product_id, description, rating);
+        const allInfo = { reviewer_image, reviewer_name, product_id, description, rating_value ,date}
+        try {
+            await axiosSecure.post('/review', allInfo)
+            refetch()
+            form.reset()
+            toast.success('Review Submitted Successfully')
+            
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     const handleRatingChange = (e) => {
@@ -37,7 +56,7 @@ const ReviewForm = ({ item }) => {
                 <textarea type="text" name="description" placeholder="description" className="w-full h-20  p-4" required />
             </div>
             <div className='flex justify-evenly  mt-5'>
-                
+
                 <select onChange={handleRatingChange} value={rating} className="select w-sm" required>
                     <option disabled selected>Rating</option>
                     <option value={'1'}>1</option>
