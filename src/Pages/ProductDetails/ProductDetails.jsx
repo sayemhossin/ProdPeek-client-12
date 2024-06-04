@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import ReviewForm from "../../Components/ReviewForm/ReviewForm";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Review from "../../Components/Review/Review";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ProductDetails = () => {
     const item = useLoaderData()
@@ -39,15 +39,38 @@ const ProductDetails = () => {
     };
 
     const handleReport = async () => {
+        const { _id, ...rest } = item;
         const allInfo = {
-            Product_id: item?._id,
-            Product_name: item?.productName,
-        }
-        try {
-            await axiosSecure.post('/report', allInfo)
-         } catch (error) {
-            toast.error(error.message)
-        }
+            product_id: _id,
+            ...rest,
+            reported_by: user?.email
+        };
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Want To Report This Product",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Report"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.post('/report', allInfo)
+
+
+                Swal.fire({
+                    title: "Reported Successfully!",
+                    text: "",
+                    icon: "success"
+                });
+
+
+
+            }
+        });
+
     }
 
 
@@ -71,7 +94,7 @@ const ProductDetails = () => {
                             <div className="flex justify-center lg:justify-start mt-6">
                                 <button
                                     onClick={() => handleCount(item._id)}
-                                    disabled={user?.email === item.adder.email || (item.upVoters && item.upVoters.includes(user?.email))}
+                                    disabled={user?.email === item?.adder?.email || (item?.upVoters && item?.upVoters.includes(user?.email))}
                                     className="btn bg-gray-200 hover:bg-gray-300 rounded-l-full px-3 py-2"
                                 >
                                     <p className="flex items-center">
@@ -81,7 +104,7 @@ const ProductDetails = () => {
                                 <div className="flex items-center bg-gray-200 ml-2 rounded-r-full px-5  py-2">
                                     <p className="">{item.upVote}</p>
                                 </div>
-                                <button onClick={handleReport} className="btn  mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" >Report</button>
+                                <button disabled={item?.adder?.email === user?.email} onClick={handleReport} className="btn  mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" >Report</button>
                             </div>
                             {/* review form */}
                             <div>
