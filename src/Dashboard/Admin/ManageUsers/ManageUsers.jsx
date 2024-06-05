@@ -45,6 +45,34 @@ const handleMakeAdmin = (user)=>{
         }
     });
 }
+const handleMakeModerator = (user)=>{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Make Moderator!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axiosSecure.patch(`/users/moderator/${user._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user?.name} is an Moderator Now!`,
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+        }
+    });
+}
 
 
 
@@ -78,7 +106,7 @@ if(isLoading) return <LoadingSpinner/>
                             <th>{idx + 1}</th>
                             <th>{user?.email}</th>
                             <th>{user?.role}</th>
-                            <th><button disabled={user?.role === 'admin' || user?.role === 'moderator'} className="btn">Moderator</button></th>
+                            <th><button onClick={() => handleMakeModerator(user)} disabled={user?.role === 'admin' || user?.role === 'moderator'} className="btn">Moderator</button></th>
                             <th><button onClick={() => handleMakeAdmin(user)}  disabled={user?.role === 'admin'}  className="btn">Admin</button></th>
                             
                          
