@@ -19,6 +19,7 @@ import Statistics from "../Dashboard/Admin/Statistics/Statistics";
 import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageCoupons from "../Dashboard/Admin/ManageCoupons/ManageCoupons";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import Payment from "../Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
         path: 'updateProduct/:id',
         element: <UpdateProduct />,
         loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+      },
+      {
+        path:'payment',
+        element:<Payment></Payment>
       },
 
 

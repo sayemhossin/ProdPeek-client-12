@@ -44,15 +44,16 @@ const AuthProvider = ({ children }) => {
 
     }
 
-const saveUser = async user =>{
-const currentUser = {
-  email: user?.email,
-  role: 'user',
-  status: 'not verified'
-}
-  const {data} = await axiosPublic.put(`/user`,currentUser)
-  return data
-}
+    const saveUser = async user => {
+        const currentUser = {
+            email: user?.email,
+            name: user?.displayName,
+            role: 'user',
+            status: 'not verified'
+        }
+        const { data } = await axiosPublic.put(`/user`, currentUser)
+        return data
+    }
 
 
 
@@ -61,14 +62,14 @@ const currentUser = {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
             if (currentUser) {
-                const userInfo = {email: currentUser.email}
+                const userInfo = { email: currentUser.email }
                 axiosPublic.post('/jwt', userInfo)
-                .then(res =>{
-                    if(res.data.token){
-                        localStorage.setItem('access-token', res.data.token)
-                        setLoading(false)
-                    }
-                })
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                            setLoading(false)
+                        }
+                    })
                 saveUser(currentUser)
             }
             else {
@@ -76,7 +77,7 @@ const currentUser = {
                 setLoading(false)
             }
             console.log('current user', currentUser)
-           
+
         })
         return () => {
             return unsubscribe

@@ -5,8 +5,10 @@ import useRole from "../../hooks/useRole";
 import useAuth from "../../hooks/useAuth";
 
 const Sidebar = () => {
-    const [role] = useRole()
+    const [role,isLoading] = useRole()
     const {user} = useAuth()
+
+    if(isLoading) return <p>...</p>
     return (
         <div>
            {
