@@ -20,6 +20,7 @@ import ManageUsers from "../Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageCoupons from "../Dashboard/Admin/ManageCoupons/ManageCoupons";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import Payment from "../Dashboard/Payment/Payment";
+import UpdateCoupon from "../Dashboard/Admin/ManageCoupons/UpdateCoupon";
 
 export const router = createBrowserRouter([
   {
@@ -101,6 +102,11 @@ export const router = createBrowserRouter([
       {
         path: 'manageCoupons',
         element: <ManageCoupons></ManageCoupons>
+      },
+      {
+        path: 'coupon/:id',
+        element: <UpdateCoupon/>,
+        loader: ({ params }) => fetch(`http://localhost:5000/coupon/${params.id}`)
       }
     ]
   }

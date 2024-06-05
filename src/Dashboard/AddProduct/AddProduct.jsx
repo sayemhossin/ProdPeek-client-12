@@ -30,6 +30,7 @@ const AddProduct = () => {
         }
     });
 
+    console.log(items);
 
     if (isLoading) {
         return <LoadingSpinner />;
@@ -46,10 +47,10 @@ const AddProduct = () => {
         const form = e.target;
         
         // Check if there is any product with status 'not verified'
-        const unverifiedProduct = items.find(item => item.status !== 'verified');
-        if (unverifiedProduct && items.length > 1) {
-            return toast.error('Go to the profile section and subscribe now to add more data');
-        }
+        // const unverifiedProduct = items.map(item => item.status !== 'verified');
+        // if (unverifiedProduct && items.length > 1) {
+        //     return toast.error('Go to the profile section and subscribe now to add more data');
+        // }
 
         const productName = form.productName.value;
         const tags = form.tags.value;
@@ -107,9 +108,9 @@ const AddProduct = () => {
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text">External Links</span>
+                            <span className="label-text">Site Links</span>
                         </label>
-                        <input type="text" name="link" placeholder="Links If Have" className="w-full h-14 p-4" />
+                        <input type="text" name="link" placeholder=" your site link Have" className="w-full h-14 p-4" required/>
                     </div>
                     <div className="md:flex justify-around">
                         <div>
