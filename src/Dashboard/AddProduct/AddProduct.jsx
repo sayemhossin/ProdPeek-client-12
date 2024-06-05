@@ -22,14 +22,14 @@ const AddProduct = () => {
         }
     });
 
-    const { data: userInfo, isLoading } = useQuery({
-        queryKey: ['user', user.email],
+    const { data: items, isLoading } = useQuery({
+        queryKey: ['my-product', user?.email],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/user/${user.email}`);
+            const { data } = await axiosPublic.get(`/my-product/${user?.email}`)
             return data;
         }
     });
-    console.log(userInfo)
+
 
     if (isLoading) {
         return <LoadingSpinner />;
@@ -41,18 +41,16 @@ const AddProduct = () => {
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
 
-
-console.log(userInfo)
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (userInfo.status !== 'verified' && userInfo.length >= 1) {
-          return toast.error('Go to the profile section and subscribe now to add more data');
-            
+        const form = e.target;
+        
+        // Check if there is any product with status 'not verified'
+        const unverifiedProduct = items.find(item => item.status !== 'verified');
+        if (unverifiedProduct && items.length > 1) {
+            return toast.error('Go to the profile section and subscribe now to add more data');
         }
 
-        const form = e.target;
         const productName = form.productName.value;
         const tags = form.tags.value;
         const description = form.description.value;

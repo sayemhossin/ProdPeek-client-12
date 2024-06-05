@@ -48,10 +48,10 @@ const Navbar = () => {
                                 {user?.photoURL || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg'} />
                         </div>
                     </div>
-                    <ul tabIndex={0} className="menu menu-sm font-semibold dropdown-content mt-3 z-[1] p-2 shadow-lg border-4 border-dashed border-blue-900 bg-[#acc7f5] rounded-lg w-52">
+                    <ul tabIndex={0} className=" menu-sm font-semibold dropdown-content mt-3 z-[1] p-2 shadow-lg border-4 border-dashed border-blue-900 bg-[#acc7f5] rounded-lg w-52">
 
                         <li className="p-2 hover:bg-[#acc7f5] rounded-md ">
-                            <p className="flex font-bold text-[16px] justify-center">{user?.displayName || 'No Name'}</p>
+                            <p className="flex hover:bg-[#acc7f5] font-bold text-[16px] justify-center">{user?.displayName || 'No Name'}</p>
                         </li>
 
                         <div className="divider border-dashed border-gray-500 "></div>
@@ -77,7 +77,7 @@ const Navbar = () => {
 
                         {
                             user ? <li className="p-2 hover:bg-[#3a66b3] rounded-md ">
-                                <button className="flex justify-start"
+                                <button className="flex h-full w-full justify-start"
                                     onClick={handleLogout}>Logout</button>
                             </li> :
 
