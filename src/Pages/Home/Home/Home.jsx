@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import Coupon from "../Coupon/Coupon";
 import FeaturedProduct from "../FeaturedProduct/FeaturedProduct";
 import TrendingProduct from "../TrendingProduct/TrendingProduct";
 
@@ -10,6 +11,7 @@ const Home = () => {
             <FeaturedProduct></FeaturedProduct>
             <h1 className="text-4xl text-center font-bold mt-5 mb-5">Trending Product</h1>
             <TrendingProduct></TrendingProduct>
+            <Coupon></Coupon>
         </div>
     );
 };
