@@ -15,7 +15,7 @@ const Products = () => {
     const queryClient = useQueryClient();
     const [searchText, setSearchText] = useState('');
     const [search, setSearch] = useState('');
-    const [itemsPerPage, setItemsPerPage] = useState(4)
+    const [itemsPerPage, setItemsPerPage] = useState(8)
     const [currentPage, setCurrentPage] = useState(1)
     const [count, setCount] = useState(0)
 
@@ -77,9 +77,9 @@ const Products = () => {
 
     if (isLoading) return <LoadingSpinner />;
     return (
-        <div>
+        <div className="bg-gray-300 pt-6 pb-10">
             <div className="text-center">
-                <form onSubmit={handleSearch}>
+                <form onSubmit={handleSearch} className="mb-10">
                     <div>
                         <input
                             className="input  rounded-r-none input-primary input-bordered border-blue-600  w-1/2"
@@ -112,12 +112,13 @@ const Products = () => {
                                     onClick={() => handleCount(item._id)}
                                     disabled={user?.email === item.adder.email || (item.upVoters && item.upVoters.includes(user?.email))}
                                     className="btn bg-gray-200 hover:bg-gray-300 rounded-l-full px-3 py-2"
+                                    style={{ backgroundColor: (user?.email === item.adder.email || (item.upVoters && item.upVoters.includes(user?.email))) ? '#ABC9FF' : '#34B3F1', cursor: 'pointer' }}
                                 >
                                     <p className="flex items-center">
                                         <BiUpvote className="text-xl" /> Upvote
                                     </p>
                                 </button>
-                                <div className="bg-gray-200 rounded-r-full px-5 py-3">
+                                <div className="bg-blue-200 rounded-r-full px-5 py-3">
                                     <p>{item.upVote}</p>
                                 </div>
                             </div>

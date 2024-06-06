@@ -12,7 +12,6 @@ import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 
-import border from '../../../assets/cupon-devider.png'
 
 
 
@@ -35,7 +34,16 @@ const Coupon = () => {
 
 
     return (
-        <div className=''>
+        <div style={{
+            backgroundImage: 'url(https://i.ibb.co/ZcSXvL3/pngtree-cartoon-childlike-background-promotion-background-image-925260.jpg)',
+            backgroundRepeat:'no-repeat',
+            backgroundSize:'cover',
+            backgroundPosition: 'center',
+            backgroundOrigin: '10%',
+            backgroundColor: 'rgba(255, 255, 255, 0.3)',
+            backgroundBlendMode: 'overlay',
+            
+        }}  className=' bg-opacity-70 bg-fixed h-[500px] flex justify-center items-center'>
             <Swiper
                 effect={'coverflow'}
                 grabCursor={true}

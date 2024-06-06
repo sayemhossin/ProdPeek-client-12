@@ -54,7 +54,7 @@ const FeaturedProduct = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 md:mx-14 lg:grid-cols-4 lg:mx-32 gap-5">
-            {items.map(item => (
+            {items.slice(0,8).map(item => (
                 <div key={item._id} className="card bg-base-100 shadow-xl">
                     <div className="h-1/2 w-full">
                         <img className="h-full w-full p-3" src={item.productPhoto} alt={item.productName} />
@@ -70,12 +70,13 @@ const FeaturedProduct = () => {
                                 onClick={() => handleCount(item._id)}
                                 disabled={user?.email === item.adder.email || (item.upVoters && item.upVoters.includes(user?.email))}
                                 className="btn bg-gray-200 hover:bg-gray-300 rounded-l-full px-3 py-2"
+                                    style={{ backgroundColor: (user?.email === item.adder.email || (item.upVoters && item.upVoters.includes(user?.email))) ? '#ABC9FF' : '#34B3F1', cursor: 'pointer' }}
                             >
                                 <p className="flex items-center">
                                     <BiUpvote className="text-xl" /> Upvote
                                 </p>
                             </button>
-                            <div className="bg-gray-200 rounded-r-full px-5 py-3">
+                            <div className="bg-blue-200 rounded-r-full px-5 py-3">
                                 <p>{item.upVote}</p>
                             </div>
                         </div>

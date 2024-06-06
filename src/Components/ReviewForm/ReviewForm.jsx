@@ -45,7 +45,7 @@ const ReviewForm = ({ item, refetch }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-gray-200 w-full mb-5 mt-5 p-5 py-16">
+        <form onSubmit={handleSubmit} className="shadow-lg bg-gray-100 w-full mb-5 mt-5 p-5 py-16">
             <div className='text-center font-bold text-xl'>
                 <p>Share Your Thoughts</p>
             </div>
@@ -65,7 +65,7 @@ const ReviewForm = ({ item, refetch }) => {
                     <option value={'4'}>4</option>
                     <option value={'5'}>5</option>
                 </select>
-                <button className="btn" type="submit">Submit</button>
+                <button className="btn bg-blue-400 hover:bg-blue-500" type="submit">Submit</button>
             </div>
         </form>
     );

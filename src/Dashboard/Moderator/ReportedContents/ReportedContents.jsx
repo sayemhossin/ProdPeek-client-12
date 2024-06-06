@@ -3,6 +3,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import Swal from "sweetalert2";
+import { FaTrash } from "react-icons/fa";
+import { TbListDetails } from "react-icons/tb";
 
 const ReportedContents = () => {
 
@@ -31,7 +33,7 @@ const ReportedContents = () => {
                await refetch()
                 Swal.fire({
                     title: "Deleted!",
-                    text: "Your product has been deleted.",
+                    text: "product has been deleted.",
                     icon: "success"
                 });
             }
@@ -43,7 +45,7 @@ const ReportedContents = () => {
     if (isLoading) return <LoadingSpinner />
 
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto p-10 bg-gray-200 shadow-lg" >
             <table className="table">
                 {/* head */}
                 <thead>
@@ -58,12 +60,12 @@ const ReportedContents = () => {
                 <tbody>
 
                     {
-                        reported.map((report, idx) => <tr key={report._id} className="hover">
+                        reported.map((report, idx) => <tr key={report._id} className="hover:bg-blue-50">
                             <th>{idx + 1}</th>
                             <td>{report.productName}</td>
                             <td>{report.reported_by}</td>
-                            <td><Link to={`/product-details/${report.product_id}`}>Details</Link></td>
-                            <td><button onClick={() => handleDelete(report.product_id)} className="btn">delete</button></td>
+                            <td ><Link className="btn bg-blue-50" to={`/product-details/${report.product_id}`}><TbListDetails  className="text-blue-700 text-3xl"/></Link></td>
+                            <td><button  onClick={() => handleDelete(report.product_id)} className="btn bg-red-50"><FaTrash className="text-xl text-red-400"/></button></td>
                         </tr>)
 
                     }

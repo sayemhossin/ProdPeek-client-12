@@ -15,7 +15,7 @@ const Review = ({ review }) => {
                         <div className="sm:flex gap-6">
                             <div className="avatar">
                                 <div className="w-24 rounded-full">
-                                    <img src={review.reviewer_image} />
+                                    <img src={review.reviewer_image || 'https://i.ibb.co/sgsSHth/360-F-229758328-7x8jw-Cwjt-BMm-C6rg-Fz-LFh-Zo-Ep-Lob-B6-L8.jpg' }  />
                                 </div>
                             </div>
                             <div className="text">

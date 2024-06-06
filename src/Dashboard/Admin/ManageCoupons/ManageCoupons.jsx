@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const ManageCoupons = () => {
 
@@ -79,8 +80,8 @@ const ManageCoupons = () => {
 
     return (
         <div className=" p-5">
-            <form onSubmit={handleSubmit} className="bg-gray-300 p-8 m-32">
-                <div className="grid  grid-cols-2 gap-10 ">
+            <form onSubmit={handleSubmit} className="bg-gray-200 p-3 shadow-2xl rounded-lg md:p-8 md:m-32">
+                <div className="grid  md:grid-cols-2 gap-10 ">
                     <div>
                         <label className="label">
                             <span className="label-text">Coupon Code</span>
@@ -111,12 +112,13 @@ const ManageCoupons = () => {
                     </div>
                 </div>
                 <div className="text-end ">
-                    <button type="submit" className="btn btn-primary">Add</button>
+                <button type="submit" className="btn hover:bg-blue-600 bg-blue-500 mt-8 mx-4 px-10">Add</button>
+
                 </div>
             </form>
             {/* all coupon  */}
-            <div>
-                <h1 className="text-3xl font-bold text-center">All Coupon</h1>
+            <div className="mt-8">
+                <h1 className="text-4xl text-gray-700 font-bold text-center mb-9">All Coupon</h1>
 
                 <div>
                     <div className="overflow-x-auto">
@@ -139,8 +141,8 @@ const ManageCoupons = () => {
                                         <td>{coupon.code}</td>
                                         <td>{coupon.date}</td>
                                         <td>${coupon.amount}</td>
-                                        <td><Link to={`/dashboard/coupon/${coupon._id}`}><button className="btn">Update</button></Link></td>
-                                        <td><button onClick={() => handleDelete(coupon._id)} className="btn">Delete</button></td>
+                                        <td><Link to={`/dashboard/coupon/${coupon._id}`}><button className="btn bg-sky-100"><FaEdit className="text-sky-600 text-xl"/></button></Link></td>
+                                        <td><button onClick={() => handleDelete(coupon._id)} className="btn bg-red-50"><FaTrash className=" text-xl text-red-500"/></button></td>
 
 
 

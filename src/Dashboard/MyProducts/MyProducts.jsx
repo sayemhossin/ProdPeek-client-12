@@ -52,7 +52,7 @@ const MyProducts = () => {
 
     if (isLoading) return <LoadingSpinner />
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto  bg-gray-200 shadow-lg md:p-10">
             <table className="table">
                 {/* head */}
                 <thead>
@@ -68,17 +68,17 @@ const MyProducts = () => {
                 <tbody>
 
                     {
-                        items.map((item, idx) => <tr key={item._id} className="hover">
+                        items.map((item, idx) => <tr key={item._id} className="hover:bg-blue-50">
                             <th>{idx + 1}</th>
                             <td>{item.productName}</td>
                             <td>{item.upVote}</td>
-                            <td>{item.status}</td>
+                            <td className={item.status === 'accept' && 'text-green-500 font-bold' || item.status === 'pending' && 'text-blue-400 font-bold' || item.status === 'reject' && 'text-red-400 font-bold'}>{item.status}</td>
                             <td><Link className="btn btn-ghost btn-lg" to={`/dashboard/updateProduct/${item._id}`}>
-                                    <FaEdit className=" text-2xl" />
-                                </Link></td>
-                            <td><button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><FaTrash /> </button>
+                                <FaEdit className=" text-2xl" />
+                            </Link></td>
+                            <td><button onClick={() => handleDelete(item._id)} className="btn btn-ghost btn-lg"><FaTrash className="text-red-600" /> </button>
                             </td>
-                            
+
                         </tr>)
                     }
 

@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import Swal from "sweetalert2";
+import { GrUserAdmin } from "react-icons/gr";
+import { MdAddModerator } from "react-icons/md";
 
 const ManageUsers = () => {
 
@@ -36,7 +38,7 @@ const handleMakeAdmin = (user)=>{
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user.name} is an Admin Now!`,
+                        title: `${user.email} is an Admin Now!`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -64,7 +66,7 @@ const handleMakeModerator = (user)=>{
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user?.name} is an Moderator Now!`,
+                        title: `${user?.email} is an Moderator Now!`,
                         showConfirmButton: false,
                         timer: 2500
                     });
@@ -87,7 +89,7 @@ if(isLoading) return <LoadingSpinner/>
 
 
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto p-10 bg-gray-200">
             <table className="table">
                 {/* head */}
                 <thead>
@@ -102,12 +104,12 @@ if(isLoading) return <LoadingSpinner/>
                 <tbody>
 
                     {
-                        users.map((user, idx) => <tr key={user._id} className="hover">
+                        users.map((user, idx) => <tr key={user._id} className="hover:bg-blue-50">
                             <th>{idx + 1}</th>
                             <th>{user?.email}</th>
-                            <th>{user?.role}</th>
-                            <th><button onClick={() => handleMakeModerator(user)} disabled={user?.role === 'admin' || user?.role === 'moderator'} className="btn">Moderator</button></th>
-                            <th><button onClick={() => handleMakeAdmin(user)}  disabled={user?.role === 'admin'}  className="btn">Admin</button></th>
+                            <th className={user?.role === 'admin' && 'font-extrabold text-blue-500' || user?.role === 'moderator' && 'font-bold text-green-500'}>{user?.role}</th>
+                            <th><button onClick={() => handleMakeModerator(user)} disabled={user?.role === 'admin' || user?.role === 'moderator'} className="btn bg-green-100"><MdAddModerator className="text-green-600 text-2xl" /></button></th>
+                            <th><button onClick={() => handleMakeAdmin(user)}  disabled={user?.role === 'admin'}  className="btn bg-blue-100"><GrUserAdmin className="text-xl text-blue-700" /></button></th>
                             
                          
                             

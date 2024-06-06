@@ -34,8 +34,8 @@ const UpdateCoupon = () => {
 
 
     return (
-     <form onSubmit={handleSubmit} className="bg-gray-300 p-8 m-32">
-        <div className="grid  grid-cols-2 gap-10 ">
+     <form onSubmit={handleSubmit} className="bg-gray-300 rounded-lg drop-shadow-2xl p-4 md:p-8 md:m-32">
+        <div className="grid  md:grid-cols-2 gap-10 ">
             <div>
                 <label className="label">
                     <span className="label-text">Coupon Code</span>
@@ -66,7 +66,7 @@ const UpdateCoupon = () => {
             </div>
         </div>
         <div className="text-end ">
-            <button type="submit" className="btn btn-primary">Add</button>
+            <button type="submit" className="btn hover:bg-blue-600 bg-blue-500 mt-8 mx-4 px-10">Update</button>
         </div>
     </form>
     );

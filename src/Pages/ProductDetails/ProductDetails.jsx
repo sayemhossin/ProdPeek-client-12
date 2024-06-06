@@ -78,14 +78,14 @@ const ProductDetails = () => {
 
     return (
 
-        <div>
+        <div className="bg-blue-50">
             <div className="w-full ">
                 <div className="w-full">
                     <img src={item.productPhoto} className="lg:hidden md:h-[600px] w-full" alt="" />
                 </div>
                 <div className="flex bg-white h-auto lg:h-[700px] ">
                     <div className="flex items-center text-center mx-auto lg:text-left px-8 md:px-12 lg:w-1/2">
-                        <div className="md:space-y-5">
+                        <div className="md:space-y-5 mt-5">
                             <h2 className="text-3xl font-bold text-gray-800 md:text-5xl">{item.productName}</h2>
                             <p className="mt-2 text-sm text-gray-500 md:text-xl">{item.tags}</p>
                             <p className="mt-2 text-sm text-gray-500 md:text-xl">{item.description}</p>
@@ -96,16 +96,20 @@ const ProductDetails = () => {
                                     onClick={() => handleCount(item._id)}
                                     disabled={user?.email === item?.adder?.email || (item?.upVoters && item?.upVoters.includes(user?.email))}
                                     className="btn bg-gray-200 hover:bg-gray-300 rounded-l-full px-3 py-2"
+                                    style={{ backgroundColor: (user?.email === item.adder.email || (item.upVoters && item.upVoters.includes(user?.email))) ? '#ABC9FF' : '#34B3F1', cursor: 'pointer' }}
                                 >
                                     <p className="flex items-center">
                                         <BiUpvote className="text-xl" /> Upvote
                                     </p>
                                 </button>
-                                <div className="flex items-center bg-gray-200 ml-2 rounded-r-full px-5  py-2">
+                                <div className="flex items-center bg-blue-200 ml-2 rounded-r-full px-5  py-2">
                                     <p className="">{item.upVote}</p>
                                 </div>
-                                <button disabled={item?.adder?.email === user?.email} onClick={handleReport} className="btn  mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" >Report</button>
+                                <button disabled={item?.adder?.email === user?.email} onClick={handleReport} className="btn  mx-4 px-8 py-3  text-gray-900 text-xs bg-red-400 hover:bg-red-500 rounded-full font-semibold  " >Report</button>
                             </div>
+
+
+
                             {/* review form */}
                             <div>
                                 <ReviewForm refetch={refetch} item={item}></ReviewForm>
@@ -130,7 +134,7 @@ const ProductDetails = () => {
             </div>
 
             {/* All  Review For specific products  */}
-            <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
+            <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto mt-16">
                 <h2 className="font-manrope font-bold text-4xl text-black text-center mb-11">People Love Us</h2>
                 <div className="grid grid-cols-12 py-6 border-y border-gray-200 mb-11">
                     <div className="col-span-12 lg:col-span-10 ">

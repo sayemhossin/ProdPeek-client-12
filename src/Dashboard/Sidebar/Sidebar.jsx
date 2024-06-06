@@ -1,5 +1,5 @@
 import SidebarItem from "../../Shared/SidebarItem/SidebarItem";
-import { FaHome, FaProductHunt, FaStar } from "react-icons/fa";
+import { FaAddressBook, FaHome, FaProductHunt, FaStar } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import useRole from "../../hooks/useRole";
 import useAuth from "../../hooks/useAuth";
@@ -36,7 +36,7 @@ const Sidebar = () => {
                 role === 'user' && <>
                     <SidebarItem label='My Profile' address='/dashboard/profile' icon={CgProfile}></SidebarItem>
 
-                    <SidebarItem label='Add Product' address='/dashboard/addProduct' icon={FaProductHunt}></SidebarItem>
+                    <SidebarItem label='Add Product' address='/dashboard/addProduct' icon={FaAddressBook}></SidebarItem>
 
                     <SidebarItem label='My Product' address='/dashboard/myProduct' icon={FaProductHunt}></SidebarItem>
                 </>
