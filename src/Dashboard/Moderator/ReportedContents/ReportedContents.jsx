@@ -5,6 +5,7 @@ import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
 import { TbListDetails } from "react-icons/tb";
+import { Helmet } from "react-helmet-async";
 
 const ReportedContents = () => {
 
@@ -46,6 +47,9 @@ const ReportedContents = () => {
 
     return (
         <div className="overflow-x-auto p-10 bg-gray-200 shadow-lg" >
+            <Helmet>
+                <title>Dashboard | Reported Content</title>
+            </Helmet>
             <table className="table">
                 {/* head */}
                 <thead>

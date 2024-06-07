@@ -1,12 +1,12 @@
 import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const UpdateCoupon = () => {
     const coupon = useLoaderData()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    console.log(coupon)
 
 
     const handleSubmit = async (e) => {
@@ -35,6 +35,9 @@ const UpdateCoupon = () => {
 
     return (
      <form onSubmit={handleSubmit} className="bg-gray-300 rounded-lg drop-shadow-2xl p-4 md:p-8 md:m-32">
+        <Helmet>
+                <title>Dashboard | Update Coupon</title>
+            </Helmet>
         <div className="grid  md:grid-cols-2 gap-10 ">
             <div>
                 <label className="label">

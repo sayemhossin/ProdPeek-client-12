@@ -4,77 +4,76 @@ import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
 import Swal from "sweetalert2";
 import { GrUserAdmin } from "react-icons/gr";
 import { MdAddModerator } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
 
-const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
 
 
-    const { data: users = [] ,refetch, isLoading} = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
-        queryFn: async()=>{
-           const {data} = await axiosSecure.get('/users')
-           return data
+        queryFn: async () => {
+            const { data } = await axiosSecure.get('/users')
+            return data
         }
     })
 
 
-const handleMakeAdmin = (user)=>{
-    Swal.fire({
-        title: "Are you sure?",
-        text: "",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Make Admin!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axiosSecure.patch(`/users/admin/${user._id}`)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.modifiedCount > 0) {
-                    refetch()
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${user.email} is an Admin Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
-        }
-    });
-}
-const handleMakeModerator = (user)=>{
-    Swal.fire({
-        title: "Are you sure?",
-        text: "",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Make Moderator!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            axiosSecure.patch(`/users/moderator/${user._id}`)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.modifiedCount > 0) {
-                    refetch()
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${user?.email} is an Moderator Now!`,
-                        showConfirmButton: false,
-                        timer: 2500
-                    });
-                }
-            })
-        }
-    });
-}
+    const handleMakeAdmin = (user) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Make Admin!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/users/admin/${user._id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `${user.email} is an Admin Now!`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+            }
+        });
+    }
+    const handleMakeModerator = (user) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Make Moderator!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/users/moderator/${user._id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `${user?.email} is an Moderator Now!`,
+                                showConfirmButton: false,
+                                timer: 2500
+                            });
+                        }
+                    })
+            }
+        });
+    }
 
 
 
@@ -84,12 +83,15 @@ const handleMakeModerator = (user)=>{
 
 
 
-if(isLoading) return <LoadingSpinner/>
+    if (isLoading) return <LoadingSpinner />
 
 
 
     return (
         <div className="overflow-x-auto p-10 bg-gray-200">
+            <Helmet>
+                <title>Dashboard | Manage Users</title>
+            </Helmet>
             <table className="table">
                 {/* head */}
                 <thead>
@@ -109,10 +111,10 @@ if(isLoading) return <LoadingSpinner/>
                             <th>{user?.email}</th>
                             <th className={user?.role === 'admin' && 'font-extrabold text-blue-500' || user?.role === 'moderator' && 'font-bold text-green-500'}>{user?.role}</th>
                             <th><button onClick={() => handleMakeModerator(user)} disabled={user?.role === 'admin' || user?.role === 'moderator'} className="btn bg-green-100"><MdAddModerator className="text-green-600 text-2xl" /></button></th>
-                            <th><button onClick={() => handleMakeAdmin(user)}  disabled={user?.role === 'admin'}  className="btn bg-blue-100"><GrUserAdmin className="text-xl text-blue-700" /></button></th>
-                            
-                         
-                            
+                            <th><button onClick={() => handleMakeAdmin(user)} disabled={user?.role === 'admin'} className="btn bg-blue-100"><GrUserAdmin className="text-xl text-blue-700" /></button></th>
+
+
+
                         </tr>)
 
                     }

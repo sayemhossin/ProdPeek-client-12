@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const MyProfile = () => {
@@ -32,6 +33,9 @@ const MyProfile = () => {
             
           }}
            className="md:h-screen bg-gray-200  flex flex-wrap items-center  justify-center  ">
+            <Helmet>
+                <title>Dashboard | Profile</title>
+            </Helmet>
             <div className="container lg:w-2/6 xl:w-2/7 sm:w-full md:w-2/3    bg-white  shadow-lg    transform   duration-200 easy-in-out">
                 <div className=" h-32 overflow-hidden" >
                     <img className="w-full" src="https://images.unsplash.com/photo-1605379399642-870262d3d051?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="" />
@@ -51,7 +55,7 @@ const MyProfile = () => {
 
 
                     <div className="text-center p-4 w-full hover:bg-gray-100 cursor-pointer">
-                       {userDetails?.status === 'verified' ?'verified':  <Link to='/dashboard/payment'><button className="">Subscribe 15$</button></Link>}
+                       {userDetails?.status === 'verified' ?'verified':  <Link to='/dashboard/payment'><button className="p-4 w-full ">Subscribe 15$</button></Link>}
                     </div>
                 </div>
             </div>

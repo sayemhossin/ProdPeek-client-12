@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const ManageCoupons = () => {
 
@@ -80,6 +81,9 @@ const ManageCoupons = () => {
 
     return (
         <div className=" p-5">
+            <Helmet>
+                <title>Dashboard | Manage Coupons</title>
+            </Helmet>
             <form onSubmit={handleSubmit} className="bg-gray-200 p-3 shadow-2xl rounded-lg md:p-8 md:m-32">
                 <div className="grid  md:grid-cols-2 gap-10 ">
                     <div>

@@ -2,9 +2,9 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const AddProduct = () => {
     const { user } = useAuth();
@@ -22,19 +22,7 @@ const AddProduct = () => {
         }
     });
 
-    const { data: items, isLoading } = useQuery({
-        queryKey: ['my-product', user?.email],
-        queryFn: async () => {
-            const { data } = await axiosPublic.get(`/my-product/${user?.email}`)
-            return data;
-        }
-    });
-
-    console.log(items);
-
-    if (isLoading) {
-        return <LoadingSpinner />;
-    }
+ 
 
     let ms = Date.now();
     const currentDate = new Date(ms);
@@ -45,13 +33,6 @@ const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
-        
-        // Check if there is any product with status 'not verified'
-        // const unverifiedProduct = items.map(item => item.status !== 'verified');
-        // if (unverifiedProduct && items.length > 1) {
-        //     return toast.error('Go to the profile section and subscribe now to add more data');
-        // }
-
         const productName = form.productName.value;
         const tags = form.tags.value;
         const description = form.description.value;
@@ -83,13 +64,15 @@ const AddProduct = () => {
             await mutateAsync(allInfo);
 
         } catch (err) {
-            console.log(err);
             toast.error(err.message);
         }
     };
 
     return (
         <div>
+            <Helmet>
+                <title>Dashboard | Add Product</title>
+            </Helmet>
             <form onSubmit={handleSubmit} className="bg-gray-200 drop-shadow-lg lg:m-16 p-5 lg:p-10 space-y-5">
                 <div className="text-center text-3xl font-bold">Add New Product</div>
                 <div className="flex gap-3 pb-10">
@@ -123,7 +106,7 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Tags</span>
                             </label>
-                            <input type="text" name="tags" placeholder="#Tags" className="w-full h-14 p-4" required />
+                            <input type="text" name="tags" placeholder="#Tags #Tags #Tags" className="w-full h-14 p-4" required />
                         </div>
                     </div>
                 </div>

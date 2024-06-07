@@ -59,9 +59,9 @@ const TrendingProduct = () => {
         <div>
             <div className="grid grid-cols-1 md:grid-cols-2 md:mx-14 lg:grid-cols-3 lg:mx-32 gap-5">
                 {items.slice(0, 6).map(item => (
-                    <div key={item._id} className="card bg-blue-50 ">
+                    <div  data-aos="fade-up" data-aos-duration="2000" key={item._id} className="card bg-blue-50 ">
                         <div className="h-1/2 w-full">
-                            <img style={{
+                            <img  data-aos="zoom-in-up" data-aos-duration="2000" style={{
                                 borderRadius: "30px"
                             }} className="h-full w-full p-3" src={item.productPhoto} alt={item.productName} />
                         </div>

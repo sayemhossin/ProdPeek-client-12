@@ -20,16 +20,16 @@ const CheckoutForm = () => {
 
 
     useEffect(() => {
-        if(totalPrice > 0) {
-         axiosSecure.post('/create-payment-intent', { price: totalPrice })
-         .then(res => {
-             console.log(res.data.clientSecret);
-             setClientSecret(res.data.clientSecret);
-         })
+        if (totalPrice > 0) {
+            axiosSecure.post('/create-payment-intent', { price: totalPrice })
+                .then(res => {
+ 
+                    setClientSecret(res.data.clientSecret);
+                })
         }
-     }, [axiosSecure, totalPrice])
+    }, [axiosSecure, totalPrice])
 
-     const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (!stripe || !elements) {
             return
@@ -50,7 +50,7 @@ const CheckoutForm = () => {
         else {
             console.log('payment method', paymentMethod)
             setError('')
-        } 
+        }
 
         // confirm payment
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
@@ -74,23 +74,23 @@ const CheckoutForm = () => {
                 const payment = {
                     email: user?.email,
                     price: totalPrice,
-                    transactionId:paymentIntent.id,
+                    transactionId: paymentIntent.id,
                     date: new Date(),
-                    status:'pending'
+                    status: 'pending'
 
                 }
-              const res = await  axiosSecure.post('/payments',payment)
-              console.log('payment save', res.data)
-              if(res.data?.acknowledged){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Thank you for your payment",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                  navigate('/dashboard/profile')
-              }
+                const res = await axiosSecure.post('/payments', payment)
+
+                if (res.data?.acknowledged) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Thank you for your payment",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/dashboard/profile')
+                }
             }
         }
     }
@@ -104,9 +104,9 @@ const CheckoutForm = () => {
 
 
     return (
-        <form className="m-20" onSubmit={handleSubmit}>
+        <form className="md:p-20 space-y-4 p-10 shadow-lg " onSubmit={handleSubmit}>
             <CardElement
-            className="bg-gray-500 h-16 p-6 max-w-lg"
+                className=" bg-blue-100 shadow-lg  rounded-lg h-16 p-6 max-w-lg"
                 options={{
                     style: {
                         base: {
@@ -122,7 +122,14 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
+            <div>
+                <label className="label">
+                    <span className="label-text text-xl font-semibold">Coupon Code</span>
+                </label>
+                <input type="text" name="" placeholder="Coupon Code If You Have" className="bg-blue-50 shadow-lg  rounded-lg h-16 p-6 w-full" />
+            </div>
+
+            <button className="btn px-6 bg-blue-500 text-xl  mt-8 ml-[75%]  flex" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             <p className="text-red-600">

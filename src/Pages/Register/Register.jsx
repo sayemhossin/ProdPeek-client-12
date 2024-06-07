@@ -6,92 +6,91 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
 
 
-    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading } = useAuth()
-    const [password,setPassword] = useState('')
-    const [show,setShow]= useState(false)
-    const navigate = useNavigate()
-  
-  
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault()
-      const form = e.target
-      const name = form.name.value
-      const email = form.email.value
-      const password = form.password.value
-      const image = form.image.files[0]
-      const hasUpperCase = /[A-Z]/;
-      const hasLowerCase = /[a-z]/;
-      const hasDigit = /\d/;
-      const hasValidLength = /.{6,}/;
-    
-      // Validate password
-      if (!hasUpperCase.test(password)) {
-        setPassword("Password must contain at least one uppercase letter.");
-        return;
-      }
-    
-      if (!hasLowerCase.test(password)) {
-        setPassword("Password must contain at least one lowercase letter.");
-        return;
-      }
-    
-      if (!hasDigit.test(password)) {
-        setPassword("Password must contain at least one digit.");
-        return;
-      }
-    
-      if (!hasValidLength.test(password)) {
-        setPassword("Password must be at least 6 characters long.");
-        return;
-      }
-  
-      const formData = new FormData()
-      formData.append('image', image)
-  
-      try {
-        setLoading(true)
-        // upload image and get image url
-        const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
+  const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading } = useAuth()
+  const [password, setPassword] = useState('')
+  const [show, setShow] = useState(false)
+  const navigate = useNavigate()
 
-        // user registration
-        const result = await createUser(email, password)
-        console.log(result)
-  
-  
-        // save user name and photo in firebase
-        await updateUserProfile(name, data.data.display_url)
-  
-  
-        navigate('/')
-        toast.success('SignUp Successful')
-  
-      } catch (err) {
-        toast.error(err.message)
-  
-      }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const form = e.target
+    const name = form.name.value
+    const email = form.email.value
+    const password = form.password.value
+    const image = form.image.files[0]
+    const hasUpperCase = /[A-Z]/;
+    const hasLowerCase = /[a-z]/;
+    const hasDigit = /\d/;
+    const hasValidLength = /.{6,}/;
+
+    // Validate password
+    if (!hasUpperCase.test(password)) {
+      setPassword("Password must contain at least one uppercase letter.");
+      return;
     }
-  
-  
-    //  handle google Sign in
-    const handleGoogleSignIn = async () => {
-      try {
-        await signInWithGoogle()
-  
-        navigate('/')
-        toast.success('SignUp Successful')
-  
-      } catch (err) {
-        toast.error(err.message)
-  
-      }
+
+    if (!hasLowerCase.test(password)) {
+      setPassword("Password must contain at least one lowercase letter.");
+      return;
     }
-  
-  
+
+    if (!hasDigit.test(password)) {
+      setPassword("Password must contain at least one digit.");
+      return;
+    }
+
+    if (!hasValidLength.test(password)) {
+      setPassword("Password must be at least 6 characters long.");
+      return;
+    }
+
+    const formData = new FormData()
+    formData.append('image', image)
+
+    try {
+      setLoading(true)
+      // upload image and get image url
+      const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData)
+
+      // user registration
+      const result = await createUser(email, password)
+      // console.log(result)
+
+
+      // save user name and photo in firebase
+      await updateUserProfile(name, data.data.display_url)
+
+
+      navigate('/')
+      toast.success('SignUp Successful')
+
+    } catch (err) {
+      toast.error(err.message)
+
+    }
+  }
+
+
+  //  handle google Sign in
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle()
+
+      navigate('/')
+      toast.success('SignUp Successful')
+
+    } catch (err) {
+      toast.error(err.message)
+
+    }
+  }
 
 
 
@@ -99,14 +98,19 @@ const Register = () => {
 
 
 
-    return (
-        
-        <div style={{
-            backgroundImage: 'url(https://i.ibb.co/9W0B7Xb/pngtree-blue-sea-and-water-wave-concept-vector-background-image-770486.jpg)',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize:'cover',
-            backgroundPosition: 'center'
-        }} className='flex justify-center items-center min-h-screen'>
+
+
+  return (
+
+    <div style={{
+      backgroundImage: 'url(https://i.ibb.co/9W0B7Xb/pngtree-blue-sea-and-water-wave-concept-vector-background-image-770486.jpg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }} className='flex justify-center items-center min-h-screen'>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900 bg-blue-100'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Register Now</h1>
@@ -161,7 +165,7 @@ const Register = () => {
                 </label>
               </div>
               <input
-               type={show?'text':"password"}
+                type={show ? 'text' : "password"}
                 name='password'
                 autoComplete='new-password'
                 id='password'
@@ -170,7 +174,7 @@ const Register = () => {
                 className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-100 text-gray-900'
               />
               <p className="text-red-500">{password}</p>
-              <span className="absolute right-2 top-10 cursor-pointer" onClick={()=>setShow(!show)}>{show?<FaEye></FaEye>:<FaEyeSlash/>}</span>
+              <span className="absolute right-2 top-10 cursor-pointer" onClick={() => setShow(!show)}>{show ? <FaEye></FaEye> : <FaEyeSlash />}</span>
             </div>
           </div>
 
@@ -210,7 +214,7 @@ const Register = () => {
         </p>
       </div>
     </div>
-    );
+  );
 };
 
 export default Register;

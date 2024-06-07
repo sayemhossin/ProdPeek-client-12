@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const UpdateProduct = () => {
     const { user } = useAuth();
@@ -28,7 +29,7 @@ const UpdateProduct = () => {
                 const { data: productImage } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`, formData);
                 productPhoto = productImage.data.display_url;
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 toast.error(err.message);
                 return;
             }
@@ -47,13 +48,16 @@ const UpdateProduct = () => {
             toast.success('Updated Successfully');
             navigate('/dashboard/myProduct');
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             toast.error(err.message);
         }
     };
 
     return (
         <div>
+            <Helmet>
+                <title>Dashboard | Update Product</title>
+            </Helmet>
             <form onSubmit={handleSubmit} className="bg-blue-50 lg:m-16 p-5 lg:p-10 space-y-5">
                 <div className="text-center text-3xl font-bold">Update The Product</div>
                 <div className="flex gap-3 pb-10">

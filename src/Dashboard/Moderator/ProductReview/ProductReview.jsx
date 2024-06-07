@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 import { RxCrossCircled } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const ProductReview = () => {
     const axiosSecure = useAxiosSecure()
@@ -37,6 +38,9 @@ const ProductReview = () => {
 
     return (
         <div className="overflow-x-auto p-10 bg-gray-200">
+            <Helmet>
+                <title>Dashboard | Product Review</title>
+            </Helmet>
             <table className="table">
                 {/* head */}
                 <thead>

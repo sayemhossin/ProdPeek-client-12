@@ -22,6 +22,8 @@ import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import Payment from "../Dashboard/Payment/Payment";
 import UpdateCoupon from "../Dashboard/Admin/ManageCoupons/UpdateCoupon";
 import ProductReviewDetails from "../Dashboard/Moderator/ProductReviewdetails/ProductReviewDetails";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +49,7 @@ export const router = createBrowserRouter([
       {
         path: 'product-details/:id',
         element: <PrivateRoute> <ProductDetails></ProductDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/featured/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-theta-one.vercel.app/featured/${params.id}`)
       },
     ]
   },
@@ -58,24 +60,24 @@ export const router = createBrowserRouter([
       // user routes
       {
         path: 'profile',
-        element: <MyProfile></MyProfile>
+        element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
       },
       {
         path: 'addProduct',
-        element: <AddProduct></AddProduct>
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
       },
       {
         path: 'myProduct',
-        element: <MyProducts></MyProducts>
+        element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>
       },
       {
         path: 'updateProduct/:id',
         element: <UpdateProduct />,
-        loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-theta-one.vercel.app/product/${params.id}`)
       },
       {
-        path:'payment',
-        element:<Payment></Payment>
+        path: 'payment',
+        element: <Payment></Payment>
       },
 
 
@@ -83,36 +85,36 @@ export const router = createBrowserRouter([
       // moderator route
       {
         path: 'productReview',
-        element: <ProductReview></ProductReview>
+        element: <PrivateRoute><ModeratorRoute><ProductReview></ProductReview></ModeratorRoute></PrivateRoute>
       },
       {
         path: 'productReview-details/:id',
         element: <ProductReviewDetails></ProductReviewDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-12-server-theta-one.vercel.app/product/${params.id}`)
       },
       {
         path: 'reportedContents',
-        element: <ReportedContents></ReportedContents>
+        element: <PrivateRoute><ModeratorRoute><ReportedContents></ReportedContents></ModeratorRoute></PrivateRoute>
       },
 
 
       // admin route
       {
         path: 'statistics',
-        element: <Statistics></Statistics>
+        element: <PrivateRoute><AdminRoute><Statistics></Statistics></AdminRoute></PrivateRoute>
       },
       {
         path: 'manageUsers',
-        element: <ManageUsers></ManageUsers>
+        element: <PrivateRoute><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRoute>
       },
       {
         path: 'manageCoupons',
-        element: <ManageCoupons></ManageCoupons>
+        element: <PrivateRoute><AdminRoute><ManageCoupons></ManageCoupons></AdminRoute></PrivateRoute>
       },
       {
         path: 'coupon/:id',
-        element: <UpdateCoupon/>,
-        loader: ({ params }) => fetch(`http://localhost:5000/coupon/${params.id}`)
+        element: <UpdateCoupon />,
+        loader: ({ params }) => fetch(`https://assignment-12-server-theta-one.vercel.app/coupon/${params.id}`)
       }
     ]
   }

@@ -1,11 +1,15 @@
 
+import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 
 const ProductReviewDetails = () => {
     const item = useLoaderData()
-    console.log(item)
+
     return (
         <div className="flex bg-gray-200 items-center justify-center h-full flex-col border-4">
+            <Helmet>
+                <title>Dashboard | Review details</title>
+            </Helmet>
             <div className="flex justify-center">
                 <img src={item.productPhoto} alt="" />
             </div>

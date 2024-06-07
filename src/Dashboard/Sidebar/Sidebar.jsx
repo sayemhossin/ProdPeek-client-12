@@ -1,8 +1,11 @@
 import SidebarItem from "../../Shared/SidebarItem/SidebarItem";
-import { FaAddressBook, FaHome, FaProductHunt, FaStar } from "react-icons/fa";
+import { FaAddressBook, FaHome, FaProductHunt, FaStar, FaUsers } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import useRole from "../../hooks/useRole";
 import useAuth from "../../hooks/useAuth";
+import { ImStatsDots } from "react-icons/im";
+import { RiCoupon3Fill } from "react-icons/ri";
+import { MdReport } from "react-icons/md";
 
 const Sidebar = () => {
     const [role,isLoading] = useRole()
@@ -50,18 +53,18 @@ const Sidebar = () => {
                 role === 'moderator' && <>
                     <SidebarItem label='Product Review' address='/dashboard/productReview' icon={FaStar}></SidebarItem>
 
-                    <SidebarItem label='Reported Contents' address='/dashboard/reportedContents' icon={FaStar}></SidebarItem>
+                    <SidebarItem label='Reported Contents' address='/dashboard/reportedContents' icon={MdReport}></SidebarItem>
                 </>
             }
 
 
             {/* admin route */}
             {role === 'admin' && <>
-                <SidebarItem label='Statistics' address='/dashboard/statistics' icon={FaStar}></SidebarItem>
+                <SidebarItem label='Statistics' address='/dashboard/statistics' icon={ImStatsDots}></SidebarItem>
 
-                <SidebarItem label='Manage Users' address='/dashboard/manageUsers' icon={FaStar}></SidebarItem>
+                <SidebarItem label='Manage Users' address='/dashboard/manageUsers' icon={FaUsers}></SidebarItem>
 
-                <SidebarItem label='Manage Coupons' address='/dashboard/manageCoupons' icon={FaStar}></SidebarItem>
+                <SidebarItem label='Manage Coupons' address='/dashboard/manageCoupons' icon={RiCoupon3Fill}></SidebarItem>
             </>}
 
 

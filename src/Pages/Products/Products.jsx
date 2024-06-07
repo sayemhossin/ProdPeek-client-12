@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Products = () => {
     const axiosPublic = useAxiosPublic()
@@ -67,7 +68,7 @@ const Products = () => {
       const pages = [...Array(numberOfPages).keys()].map(element => element + 1)
 
       const handlePaginationButton = value => {
-        console.log(value)
+        // console.log(value)
         setCurrentPage(value)
       }
     const handleSearch = e => {
@@ -78,18 +79,21 @@ const Products = () => {
     if (isLoading) return <LoadingSpinner />;
     return (
         <div className="bg-gray-300 pt-6 pb-10">
+          <Helmet>
+            <title>All Product</title>
+          </Helmet>
             <div className="text-center">
                 <form onSubmit={handleSearch} className="mb-10">
                     <div>
                         <input
-                            className="input  rounded-r-none input-primary input-bordered border-blue-600  w-1/2"
+                            className="input  rounded-r-none input-primary input-bordered border-blue-500  w-1/2"
                             type='text'
                             name='search'
                             onChange={e => setSearchText(e.target.value)}
                             value={searchText}
                             placeholder='Search By Tag Name'
                         />
-                        <button className='px-1 h-[50px] rounded-l-none md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none'>
+                        <button className='px-1 h-[50px] rounded-l-none md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:bg-blue-600 focus:outline-none'>
                             Search
                         </button>
                     </div>

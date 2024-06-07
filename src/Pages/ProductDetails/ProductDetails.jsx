@@ -7,6 +7,7 @@ import ReviewForm from "../../Components/ReviewForm/ReviewForm";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Review from "../../Components/Review/Review";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ProductDetails = () => {
     const item = useLoaderData()
@@ -79,11 +80,14 @@ const ProductDetails = () => {
     return (
 
         <div className="bg-blue-50">
+            <Helmet>
+                <title>Product Details</title>
+            </Helmet>
             <div className="w-full ">
                 <div className="w-full">
                     <img src={item.productPhoto} className="lg:hidden md:h-[600px] w-full" alt="" />
                 </div>
-                <div className="flex bg-white h-auto lg:h-[700px] ">
+                <div className="flex bg-gray-300 h-auto lg:h-[700px] ">
                     <div className="flex items-center text-center mx-auto lg:text-left px-8 md:px-12 lg:w-1/2">
                         <div className="md:space-y-5 mt-5">
                             <h2 className="text-3xl font-bold text-gray-800 md:text-5xl">{item.productName}</h2>
@@ -134,9 +138,9 @@ const ProductDetails = () => {
             </div>
 
             {/* All  Review For specific products  */}
-            <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto mt-16">
+            <div className="w-full max-w-7xl px-4 md:px-5  mx-auto mt-16">
                 <h2 className="font-manrope font-bold text-4xl text-black text-center mb-11">People Love Us</h2>
-                <div className="grid grid-cols-12 py-6 border-y border-gray-200 mb-11">
+                <div className="grid grid-cols-12 py-6 border-y border-gray-200 pb-11">
                     <div className="col-span-12 lg:col-span-10 ">
                         <h5 className="font-manrope font-semibold text-2xl leading-9 text-black text-center">Reviews
                             <span className="lg:hidden font-manrope font-semibold text-2xl leading-9 text-black text-center"> &
@@ -147,7 +151,7 @@ const ProductDetails = () => {
                         <h5 className="font-manrope font-semibold text-2xl leading-9 text-black text-center">Rating</h5>
                     </div>
                 </div>
-                <div className="space-y-16 mx-9 lg:mx-0 md:mx-9">
+                <div className="space-y-16 mx-9 pb-10 lg:mx-0 md:mx-9">
                     {
                         reviews.map(review => <Review key={review._id} review={review}></Review>)
                     }

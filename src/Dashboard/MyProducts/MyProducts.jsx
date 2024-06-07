@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const MyProducts = () => {
 
@@ -53,6 +54,9 @@ const MyProducts = () => {
     if (isLoading) return <LoadingSpinner />
     return (
         <div className="overflow-x-auto  bg-gray-200 shadow-lg md:p-10">
+            <Helmet>
+                <title>Dashboard | My Products</title>
+            </Helmet>
             <table className="table">
                 {/* head */}
                 <thead>

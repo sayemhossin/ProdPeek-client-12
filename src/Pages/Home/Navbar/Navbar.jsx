@@ -33,7 +33,7 @@ const Navbar = () => {
                         {link}
                     </ul>
                 </div>
-                <Link to={'/'} className="md:text-5xl cursor-pointer hover:bg-white font-bold btn-ghost text-xl">ProdPeek</Link>
+                <Link to={'/'} className="md:text-5xl cursor-pointer font-bold  text-xl"><span className="text-blue-500">P</span>rod<span className="text-blue-500">P</span>eek</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

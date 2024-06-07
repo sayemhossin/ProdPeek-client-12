@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ const Login = () => {
         toast.success('SignUp Successful')
   
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         toast.error(err.message)
         setLoading(false)
       }
@@ -48,7 +49,7 @@ const Login = () => {
         toast.success('SignUp Successful')
   
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         toast.error(err.message)
   
       }
@@ -63,6 +64,9 @@ const Login = () => {
             backgroundSize:'cover',
             backgroundPosition: 'center'
         }} className='flex  justify-center items-center min-h-screen'>
+          <Helmet>
+                <title>Login</title>
+            </Helmet>
         <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-blue-100 text-gray-900'>
           <div className='mb-8 text-center'>
             <h1 className='my-3 text-4xl font-bold'>Log In</h1>

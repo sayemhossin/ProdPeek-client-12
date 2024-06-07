@@ -9,7 +9,7 @@ const DashboardLayout = () => {
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 
-                <label htmlFor="my-drawer-2" className="btn mt-6 mb-8 drawer-button lg:hidden"><FaAlignJustify /></label>
+                <label htmlFor="my-drawer-2" className="m-10 mt-6 mb-8 drawer-button lg:hidden"><FaAlignJustify className=" bg-gray-50 text-5xl p-3 ml-3" /></label>
 
                 <Outlet></Outlet>
             </div>

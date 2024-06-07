@@ -6,6 +6,7 @@ import { AiFillProduct } from "react-icons/ai";
 import { MdReviews } from "react-icons/md";
 import { FaCircleDollarToSlot } from "react-icons/fa6";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
+import { Helmet } from "react-helmet-async";
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -47,6 +48,9 @@ const Statistics = () => {
 
     return (
         <div className="md:p-8">
+            <Helmet>
+                <title>Dashboard | Statistics</title>
+            </Helmet>
             <div className="stats w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-primary-content">
                 <div className="stat">
                     <div className="stat-title flex items-center gap-5 md:text-2xl font-bold text-gray-100 md:mb-6">
@@ -74,7 +78,7 @@ const Statistics = () => {
                 </div>
             </div>
             <div className="w-full h-[600px] flex justify-center">
-            <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                         <Pie
                             data={data}
@@ -90,7 +94,7 @@ const Statistics = () => {
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
-                        <Legend formatter={(value, entry) => `${entry.payload.name}: ${entry.payload.value}`}/>
+                        <Legend formatter={(value, entry) => `${entry.payload.name}: ${entry.payload.value}`} />
                     </PieChart>
                 </ResponsiveContainer>
             </div>
