@@ -24,11 +24,13 @@ import UpdateCoupon from "../Dashboard/Admin/ManageCoupons/UpdateCoupon";
 import ProductReviewDetails from "../Dashboard/Moderator/ProductReviewdetails/ProductReviewDetails";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
+import Error from "../Pages/Error/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<Error></Error>,
     children: [
       {
         path: '/',
